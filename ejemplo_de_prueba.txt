@@ -1,0 +1,213 @@
+# Ejemplo de flujo de ejecución del módulo sieteymedio.ex.
+
+# Las siguientes instrucciones se han ejecutado en el compilador interactivo de
+# Elixir.
+
+# Compilación del módulo sieteymedio.ex.
+c("sieteymedio.ex")
+
+# Se crea una partida.
+partida = SieteYMedio.crear_partida()
+
+# Se crean 2 jugadores y comienza la partida.
+partida2 = (SieteYMedio.crear_jugador(partida) |> SieteYMedio.crear_jugador())
+  # Tupla con el estado inicial de la partida.
+  {{:jugando, :jugador1}, [:jugador1, :jugador2],
+  [
+    {:uno, :oros, :mazo},
+    {:dos, :oros, :mazo},
+    {:tres, :oros, :mazo},
+    {:cuatro, :oros, :mazo},
+    {:cinco, :oros, :mazo},
+    {:seis, :oros, :mazo},
+    {:siete, :oros, :mazo},
+    {:sota, :oros, :mazo},
+    {:caballo, :oros, :mazo},
+    {:rey, :oros, :mazo}, 
+    {:uno, :copas, :mazo},
+    {:dos, :copas, :mazo},
+    {:tres, :copas, :mazo},
+    {:cuatro, :copas, :mazo},
+    {:cinco, :copas, :mazo},
+    {:seis, :copas, :jugador2},
+    {:siete, :copas, :mazo},
+    {:sota, :copas, :mazo},
+    {:caballo, :copas, :mazo},
+    {:rey, :copas, :mazo},
+    {:uno, :espadas, :mazo},
+    {:dos, :espadas, :mazo},
+    {:tres, :espadas, :mazo},
+    {:cuatro, :espadas, :mazo},
+    {:cinco, :espadas, :mazo},
+    {:seis, :espadas, :mazo},
+    {:siete, :espadas, :mazo},
+    {:sota, :espadas, :mazo},
+    {:caballo, :espadas, :mazo},
+    {:rey, :espadas, :mazo},
+    {:uno, :bastos, :jugador1},
+    {:dos, :bastos, :mazo},
+    {:tres, :bastos, :mazo},
+    {:cuatro, :bastos, :mazo},
+    {:cinco, :bastos, :mazo},
+    {:seis, :bastos, :mazo},
+    {:siete, :bastos, :mazo},
+    {:sota, :bastos, :mazo},
+    {:caballo, :bastos, :mazo},
+    {:rey, :bastos, :mazo}
+  ]}
+
+# Se muestran las cartas de todos los jugadores.
+SieteYMedio.ver_carta(partida2, :todos)
+"
+--------------------------
+Cartas de jugador1
+
+  |   cinco de copas   |
+
+--------------------------
+Cartas de jugador2
+
+  |   cuatro de copas   |
+"
+
+# jugador1 pide una carta.
+partida3 = SieteYMedio.pedir_carta(partida2, :jugador1)
+
+# jugador1 observa sus cartas.
+SieteYMedio.ver_carta(partida3, :jugador1)
+"
+  |   dos de oros   |
+
+  |   cinco de copas   |
+"
+
+# jugador1 se planta y comienza el turno de jugador2.
+partida4 = SieteYMedio.plantarse(partida3)             
+
+# Se muestran las cartas de todos los jugadores.
+SieteYMedio.ver_carta(partida4, :todos)                
+"
+--------------------------
+Cartas de jugador1
+
+  |   dos de oros   |
+
+  |   cinco de copas   |
+
+--------------------------
+Cartas de jugador2
+
+  |   cuatro de copas   |
+" 
+
+# jugador2 pide una carta.
+partida5 = SieteYMedio.pedir_carta(partida4, :jugador2)
+
+# jugador2 observa sus cartas.
+SieteYMedio.ver_carta(partida5, :jugador2)
+"
+  |   cuatro de copas   |
+
+  |   rey de bastos   |
+"
+
+# jugador2 pide una carta.
+partida6 = SieteYMedio.pedir_carta(partida5, :jugador2)
+
+# jugador2 observa sus cartas.
+SieteYMedio.ver_carta(partida6, :jugador2)             
+"
+  |   cuatro de copas   |
+
+  |   uno de bastos   |
+
+  |   rey de bastos   |
+"
+
+# jugador2 pide una carta.
+partida7 = SieteYMedio.pedir_carta(partida6, :jugador2)
+
+# jugador2 observa sus cartas.
+SieteYMedio.ver_carta(partida7, :jugador2)             
+"
+  |   uno de copas   |
+
+  |   cuatro de copas   |
+
+  |   uno de bastos   |
+
+  |   rey de bastos   |
+"
+
+# jugador2 pide una carta. La partida ha finalizado, gana el jugador1 porque
+# jugador2 se ha pasado de 7.5.
+partida8 = SieteYMedio.pedir_carta(partida7, :jugador2)
+  Fin de la partida
+  # Tupla con el estado final de la partida.
+  {{:finalizada, [jugador1: 7.0]}, [:jugador1, :jugador2],
+  [
+    {:uno, :oros, :mazo},
+    {:dos, :oros, :jugador1},
+    {:tres, :oros, :mazo},
+    {:cuatro, :oros, :mazo},
+    {:cinco, :oros, :mazo},
+    {:seis, :oros, :mazo},
+    {:siete, :oros, :mazo},
+    {:sota, :oros, :mazo},
+    {:caballo, :oros, :mazo},
+    {:rey, :oros, :mazo},
+    {:uno, :copas, :jugador2},
+    {:dos, :copas, :mazo},
+    {:tres, :copas, :mazo},
+    {:cuatro, :copas, :jugador2},
+    {:cinco, :copas, :jugador1},
+    {:seis, :copas, :mazo},
+    {:siete, :copas, :mazo},
+    {:sota, :copas, :mazo},
+    {:caballo, :copas, :mazo},
+    {:rey, :copas, :mazo},
+    {:uno, :espadas, :mazo},
+    {:dos, :espadas, :mazo},
+    {:tres, :espadas, :mazo},
+    {:cuatro, :espadas, :mazo},
+    {:cinco, :espadas, :jugador2},
+    {:seis, :espadas, :mazo},
+    {:siete, :espadas, :mazo},
+    {:sota, :espadas, :mazo},
+    {:caballo, :espadas, :mazo},
+    {:rey, :espadas, :mazo},
+    {:uno, :bastos, :jugador2},
+    {:dos, :bastos, :mazo},
+    {:tres, :bastos, :mazo},
+    {:cuatro, :bastos, :mazo},
+    {:cinco, :bastos, :mazo},
+    {:seis, :bastos, :mazo},
+    {:siete, :bastos, :mazo},
+    {:sota, :bastos, :mazo},
+    {:caballo, :bastos, :mazo},
+    {:rey, :bastos, :jugador2}
+  ]}
+
+# Como se puede observar, jugador2 se ha pasado del 7.5.
+SieteYMedio.ver_carta(partida8, :todos)                
+"
+--------------------------
+Cartas de jugador1
+
+  |   dos de oros   |
+
+  |   cinco de copas   |
+
+--------------------------
+Cartas de jugador2
+
+  |   uno de copas   |
+
+  |   cuatro de copas   |
+
+  |   cinco de espadas   |
+
+  |   uno de bastos   |
+
+  |   rey de bastos   |
+"
